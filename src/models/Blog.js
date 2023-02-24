@@ -5,5 +5,6 @@ export class Blog {
     this.imgUrl = data.imgUrl
     this.creator = data.creator
     this.title = data.title
+    this.createdAt = new Date(data.createdAt).toLocaleDateString()
   }
 }

@@ -15,7 +15,9 @@
             </div>
           </div>
           <div class="col-4 g-0">
-            <img :src="blog.imgUrl" :alt="blog.title" class="img-fluid img-height">
+            <router-link :to="{ name: 'Blog', params: {blogId: blog.id}}">
+              <img :src="blog.imgUrl" :alt="blog.title" class="img-fluid img-height">
+            </router-link>
           </div>
         </div>
 </template>
@@ -23,6 +25,7 @@
 
 <script>
 import { Blog } from '../models/Blog';
+import { blogsService } from '../services/BlogsService.js';
 
 export default {
   props: {
@@ -31,13 +34,39 @@ export default {
       required: true,
     }
   },
-  setup(){
-    return {}
+  setup(props){
+
+    return {
+      setActiveBlog(){
+        blogsService.setActiveBlog(props.blog)
+      }
+    }
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+.body-container{
+  height: 20vh;
+  overflow-y: scroll;
+}
+
+.scroll{
+  overflow-y: scroll;
+}
+
+.img-height{
+  height: 32vh;
+  width: 100%;
+}
+
+
+.profile-picture{
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px black;
+}
 
 </style>
